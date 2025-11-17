@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin DashBoard</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <main>
+        <section id="dashboard" aria-labelledby="admin-dashboard-heading">
+            <div id="dashList">
+                <ul>
+                    <li><a href="productsDashboard.html">Manage Products</a></li>
+                    <li><a href="ordersDashboard.html">Manage Orders</a></li>
+                    <li><a href="usersDashboard.html">Manage Users</a></li>
+                </ul>
+            </div>
+            <section class="summary-container" id="summaries" aria-labelledby="dashboard-summaries-heading">
+                <div class="summary-header">
+                    <h1 id="admin-dashboard-heading">Welcome to Admin Dashboard</h1>
+                </div>
+                <div class="summaries-wrapper">
+                    <div id="productsSummary" class="summary-box">
+                        <h3 class="sh">Products Summary</h3>
+                        <p class="sp">Total Products: 150</p>
+                    </div>
+                    <div id="ordersSummary" class="summary-box">
+                        <h3 class="sh">Orders Summary</h3>
+                        <p class="sp">Total Orders: 75</p>
+                        <p class="sp">Total Sales: $12,500</p>
+                    </div>
+                    <div id="usersSummary" class="summary-box">
+                        <h3 class="sh">Users Summary</h3>
+                        <p class="sp">Total Users: 200</p>
+                    </div>
+                    <div id="messagesSummary" class="summary-box">
+                        <h3 class="sh">Messages Summary</h3>
+                        <p class="sp">Total Messages: 3</p>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </main>
+</body>
+</html>
