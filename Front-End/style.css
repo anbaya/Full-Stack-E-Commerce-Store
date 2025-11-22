@@ -197,7 +197,7 @@ button:hover {
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: var(--text-color);
+  color: var(--button-text-color);
   font-size: 7vw;
   font-weight: bold;
   font-family: var(--font-family);

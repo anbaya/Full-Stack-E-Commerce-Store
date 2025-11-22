@@ -48,7 +48,7 @@ if (deleteButton) {
                 headers: { 'Content-Type': 'application/json' }
             });
             alert("Product deleted successfully!");
-            window.location.href = "./products.html";
+            window.location.href = "./product.html";
         } catch (error) {
             console.error("Error deleting product:", error);
         }

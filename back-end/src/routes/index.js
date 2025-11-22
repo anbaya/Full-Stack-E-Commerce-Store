@@ -5,6 +5,7 @@ const cardRoutes = require ('../modules/cards/card.routes.js');
 const orderRoutes = require ('../modules/orders/order.routes.js');
 const mailRoutes = require ('../utils/mail.routes.js');
 const dashboardRoutes = require ('../modules/dashboard/dashboard.routes.js');
+const addressRoutes = require ('../modules/address/address.routes.js');
 
 const router = express.Router();
 
@@ -14,5 +15,6 @@ router.use('/cards', cardRoutes);
 router.use('/orders', orderRoutes);
 router.use('/mail', mailRoutes);
 router.use('/dashboard', dashboardRoutes);
+router.use('/addresses', addressRoutes);
 
 module.exports = router;

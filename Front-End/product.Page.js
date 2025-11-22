@@ -20,7 +20,7 @@ async function loadProducts() {
 
         container.innerHTML = products.map(product => `
             <div class="card" data-id="${product._id}">
-                <img src="${IMAGE_BASE + product.images[0]}" alt="${product.name}">
+                <img class="pimage" src="${IMAGE_BASE + product.images[0]}" alt="${product.name}">
                 <h2>${product.name}</h2>
                 <span class="product-price">$${product.price.toFixed(2)}</span>
             </div>
@@ -63,6 +63,9 @@ async function loadProduct() {
 document.addEventListener("click", function (e) {
     if (e.target.classList.contains("preview")) {
         document.getElementById("mainImage").src = e.target.src;
+    }
+    else if (e.target.classList.contains("card") || e.target.classList.contains("pimage")){
+        window.location.href = `./productPage.html?ProductId=${e.target.closest(".card").getAttribute("data-id")}`;
     }
     else if (e.target.id === "addToCartButton") {
         if (document.cookie.includes("token")) {

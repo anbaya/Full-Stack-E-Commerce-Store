@@ -32,13 +32,27 @@ const login = async ({email, password}) => {
 	const isMatch = await user.comparePassword(password);
 	if (!isMatch) throw new Error("invalid password or email");
 
-	const token = jwt.sign({id: user.id}, process.env.SECRET_KEY, {expiresIn: '1d'});
+	const token = jwt.sign({id: user.id}, process.env.SECRET_KEY, {expiresIn: '15d'});
 	const section = await Section.create({ userId: user._id, token });
 
 	return section;
 }
 
+async function me(token) {
+	jwt.verify(token, process.env.SECRET_KEY, async (err, decoded) => {
+		if (err) {
+			throw new Error("Invalid token");
+		}
+		const user = await User.findById(decoded.id);
+		if (!user) {
+			throw new Error("User not found");
+		}
+		return user;
+	});
+}
+
 module.exports = {
 	register,
-	login
+	login,
+	me
 }

@@ -1,13 +1,13 @@
 const User = require('./user.module');
 const Card = require('../cards/card.module');
-const {register, login} = require('../../sevices/auth.services');
+const auth = require('../../sevices/auth.services');
 const {updateUser, getUserById: getUserByIdService} = require('./user.services');
 const mailer = require('../../utils/mailer');
 
 // Add User
 const addUser = async (req, res) => {
 	try {
-		const user = await register(req.body);
+		const user = await auth.register(req.body);
 		if (!user) {
 			return res.status(400).json({ message: "Invalid user data" });
 		}
@@ -40,7 +40,7 @@ const addUser = async (req, res) => {
 // Login User
 const userLogin = async (req, res) => {
 	try {
-		const section = await login(req.body);
+		const section = await auth.login(req.body);
 		if (!section)
 			return res.status(400).json({ message: "login error" });
 		res.status(200).json(section);
@@ -120,10 +120,25 @@ const getUserById = async (req, res) => {
 	}
 }
 
+const Me = async (req, res) => {
+	try {
+		const token = req.headers.authorization.split(' ')[1];
+		const user = await auth.me(token);
+		if (!user) {
+			return res.status(404).json({ message: "User not found" });
+		}
+		res.status(200).json(user);
+	} catch (error) {
+		console.error("Error in me controller:", error.message);
+		res.status(500).json({ message: error.message || "Server error" });
+	}
+};
+
 module.exports = {
 	addUser,
 	getAllUsers,
 	updatedUserById,
 	userLogin,
-	getUserById
+	getUserById,
+	Me
 };
