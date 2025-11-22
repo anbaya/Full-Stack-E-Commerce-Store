@@ -14,10 +14,10 @@ router.get('/products', controllers.getAllProducts);
 router.get('/products/:id', controllers.getProductById);
 
 // Search Products by Name
-router.get('/products/search', controllers.searchProductsByName);
+router.post('/products/search', controllers.searchProductsByName);
 
 // Update Product by ID
-router.put('/products/:id', controllers.updateProductById);
+router.put('/products/:id', upload.array("images", 5), controllers.updateProductById);
 
 // Delete Product by ID
 router.delete('/products/:id', controllers.deleteProductById);

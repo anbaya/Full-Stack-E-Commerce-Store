@@ -3,54 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>store</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <title>Products Manager</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="./dashboard.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton+SC&family=Playpen+Sans+Arabic:wght@100..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="icon" href="general-images/icon.png" type="image/png">
-
-    <!-- Axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
-    <!-- Your JS -->
-    <script type="module" src="./js/home.js"></script>
+    <script type="module" src="./getProducts.js"></script>
 </head>
-
 <body>
     <header>
         <nav>
             <div class="nav-container">
                 <h2 class="logo">D.Seller</h2>
                 <div class="menu">
+                    <a href="dashboard.html">Dashboard</a>
                     <a href="home.html">Home</a>
                     <a href="about.html">About</a>
                     <a href="contact.html">Contact</a>
-                    <a href="product.html">Products</a>
+                    <a href="product.html">Product</a>
                 </div>
             </div>
         </nav>
-
-        <div class="hero-container">
-            <div class="hero-image">
-                <img src="home_images/desert.jpeg" alt="Banner Image" class="main-image">
-                <div class="hero-text">Welcome To The Desert Seller</div>
-            </div>
-        </div>
     </header>
-
-    <section>
-        <main>
-            <h1 class="before-gallery section-title">Have a look at our products</h1>
-
-            <div class="gallery">
-                <div class="flex-cards" id="product-cards"></div>
+    <main>
+        <section>
+            <div class="product-section text-section">
+                <h2 class="section-title">Our Products</h2>
+                <p class="section-description">Explore our wide range of products designed to meet your needs.</p>
             </div>
-        </main>
-    </section>
-
+                <form action="search" class="search-bar" id="search-form">
+                    <input type="text" placeholder="Search products..." id="search-input">
+                    <button type="button" id="search-button" class="search-button"><a href="addProduct.html">Add Product</a></button>
+                </form>
+        </section>
+        <div class="flex-cards" id="product-cards"></div>
     <footer class="bottom-bar">
         <p>&copy; 2025 MyWebsite. All rights reserved.</p>
     </footer>
+    </main>
 </body>
 </html>

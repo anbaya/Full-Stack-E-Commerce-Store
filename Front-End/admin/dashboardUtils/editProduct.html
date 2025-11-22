@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product</title>
+    <link rel="icon" href="general-images/icon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <main>
+        <nav>
+            <div class="nav-container">
+                <h2 class="logo">D.Seller</h2>
+                <div class="menu">
+                    <a href="dashboard.html">Dashboard</a>
+                    <a href="home.html">Home</a>
+                    <a href="about.html">About</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="product.html">Product</a>
+                </div>
+            </div>
+        </nav>
+        <div class="add-product-section">
+            <form id="add-product-form" class="form" enctype="multipart/form-data">
+
+                <div class="form-left">
+                    <input type="text" name="name" placeholder="Product name"><br>
+                    <input type="number" step="0.01" name="price" placeholder="Price"><br>
+                    <input type="text" name="description" placeholder="Description"><br>
+                    <input type="text" name="category" placeholder="Category"><br>
+                    <input type="number" name="stock" placeholder="Stock"><br>
+                </div>
+
+                <div class="form-right">
+                    <label>Choose product images:</label>
+                    <input type="file" name="images" accept="image/*" multiple><br><br>
+
+                    <!-- Optional: preview image -->
+                    <img id="preview" />
+                </div>
+
+                <button class="button Primary-button" type="submit">edit Product</button>
+            </form>
+        </div>
+
+                <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+                <script src="./edit-product.js" defer></script>
+    </main>
+</body>
+</html>

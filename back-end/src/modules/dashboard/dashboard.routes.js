@@ -3,7 +3,7 @@ const router = express.Router();
 const dashboardController = require('./dashboard.controllers');
 
 // Get Dashboard Stats
-router.get('/stats', dashboardController.getDashboardData);
+router.get('/status', dashboardController.getDashboardData);
 
 // Get All Orders - Admin
 router.get('/orders', dashboardController.getAllOrders);

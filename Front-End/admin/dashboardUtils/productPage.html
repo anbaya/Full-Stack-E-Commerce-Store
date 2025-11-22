@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="ProductTitle">Product Page</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../../style.css">
     <link rel="stylesheet" href="Product.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton+SC&family=Playpen+Sans+Arabic:wght@100..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
@@ -19,10 +19,11 @@
             <div class="nav-container">
                 <h2 class="logo">D.Seller</h2>
                 <div class="menu">
+                    <a href="dashboard.html">Dashboard</a>
                     <a href="home.html">Home</a>
                     <a href="about.html">About</a>
                     <a href="contact.html">Contact</a>
-                    <a href="product.html">Products</a>
+                    <a href="product.html">Product</a>
                 </div>
             </div>
         </nav>
@@ -41,18 +42,11 @@
                 <p id="productDescription">Product Description</p>
                 <span id="productPrice">$0.00</span>
                 <h4 id="stock">In Stock</h4>
-                <button id="addToCartButton" class="button">Add to Cart</button>
+                <button id="delete" class="button">Delete</button>
+                <button id="edit" class="button">Edit</button>
             </div>
         </section>
-        <section id="oderProductsSection">
-            <h1 class="before-gallery section-title">Have a look at other Products</h1>
-            <div class="gallery">
-                <div class="flex-cards" id="product-cards"></div>
-            </div>
-        </section>
+        <section id="oderProductsSection"></section>
     </main>
-    <footer class="bottom-bar">
-        <p>&copy; 2025 MyWebsite. All rights reserved.</p>
-    </footer>
 </body>
 </html>

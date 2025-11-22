@@ -27,6 +27,30 @@ const updateUser = async (userId, {name, email, type, address, purchasedProducts
     return await User.findById(userId);
 };
 
+// get user by id
+const getUserById = async (userId) => {
+    try {
+        if (!userId) {
+            throw new Error("User ID is required");
+        }
+        const user = await User.findById(userId)
+            .populate('address')  // This populates the address array
+            .populate('card')     // This populates the card reference
+            .populate('purchasedProducts'); // You might also want to populate purchased products
+        if (!user) {
+            throw new Error("User not found");
+        }
+        return user;
+    } catch (error) {
+        // Handle MongoDB ObjectId cast errors
+        if (error.name === 'CastError') {
+            throw new Error("Invalid user ID format");
+        }
+        throw new Error("Error fetching user: " + error.message);
+    }
+}
+
 module.exports = {
     updateUser,
+    getUserById,
 };

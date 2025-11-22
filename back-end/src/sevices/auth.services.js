@@ -32,7 +32,7 @@ const login = async ({email, password}) => {
 	const isMatch = await user.comparePassword(password);
 	if (!isMatch) throw new Error("invalid password or email");
 
-	const token = jwt.sign({id: user.id}, 'supersecret', {expiresIn: '1d'});
+	const token = jwt.sign({id: user.id}, process.env.SECRET_KEY, {expiresIn: '1d'});
 	const section = await Section.create({ userId: user._id, token });
 
 	return section;

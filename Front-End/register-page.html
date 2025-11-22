@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Page</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="register.js" defer></script>
+</head>
+<body>
+    <main>
+        <h1>D.Seller</h1>
+        <section class="contact-section">
+            <h2>Register</h2>
+            <form id="register-Form" class="login-form">
+                <div>
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="text" id="email" name="email" required>
+                </div>
+                <div>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button class="button" type="submit">Register</button>
+                <br>
+                <a href="login-page.html">login</a>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

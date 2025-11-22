@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DashBoard</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="dashboard.js" defer></script>
+</head>
+<body>
+        <nav>
+            <div class="nav-container">
+                <h2 class="logo">D.Seller</h2>
+                <div class="menu">
+                    <a href="home.html">Home</a>
+                    <a href="about.html">About</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="product.html">Products</a>
+                </div>
+            </div>
+        </nav>
+    <main>
+        <section id="dashboard" aria-labelledby="admin-dashboard-heading">
+            <div id="dashList">
+                <ul>
+                    <li><a href="orderManager.html">Manage Orders</a></li>
+                    <li><a href="usersDashboard.html">Manage account</a></li>
+                </ul>
+            </div>
+            <section class="summary-container" id="summaries" aria-labelledby="dashboard-summaries-heading">
+                <div class="summary-header">
+                    <h1 id="dashboard-heading">Welcome to Account Dashboard</h1>
+                </div>
+                <div class="summaries-wrapper">
+                    <div id="email" class="summary-box">
+                        <h3 class="sh">email</h3>
+                        <p class="sp" id="totalProducts">example@example.com</p>
+                        <button class="card-button">Edit</button>
+                    </div>
+                    <div id="OwnerSummary" class="summary-box">
+                        <h3 class="sh">Account Owner</h3>
+                        <p class="sp" id="totalOrders">Full name: test name</p>
+                        <p class="sp" id="totalSales">Username: testuser</p>
+                        <button class="card-button">Edit</button>
+                    </div>
+                    <div id="AddressSummary" class="summary-box">
+                        <h3 class="sh">Address</h3>
+                        <p class="sp" id="totalUsers">123 Main St, Anytown, USA</p>
+                        <button class="card-button">Edit</button>
+                    </div>
+                    <div id="messagesSummary" class="summary-box">
+                        <h3 class="sh">Messages Summary</h3>
+                        <p class="sp" id="totalMessages">Total Messages: 3</p>
+                        <button class="card-button">Edit</button>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </main>
+</body>
+</html>

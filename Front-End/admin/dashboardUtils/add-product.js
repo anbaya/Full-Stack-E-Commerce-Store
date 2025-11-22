@@ -26,6 +26,7 @@
         });
         alert("Product added successfully!");
         form.reset();
+        window.location.href = "./editProduct.html";
     } catch (error) {
         console.error("Error adding product:", error);
         alert("Failed to add product. Please try again.");

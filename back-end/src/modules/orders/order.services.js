@@ -1,6 +1,7 @@
 const Order = require ('./order.module');
 
 const createOrder = async ({userId, products, totalPrice, address, shipping}) => {
+    console.log(userId, products, totalPrice, address, shipping);
     if (!userId || !products || !totalPrice || !address || !shipping) {
         throw new Error("All order details are required");
     }
@@ -22,6 +23,19 @@ const createOrder = async ({userId, products, totalPrice, address, shipping}) =>
     return newOrder;
 }
 
+// get order by ID
+const getOrderById = async (orderId) => {
+    if (!orderId) {
+        throw new Error("Order ID is required");
+    }
+    const order = await Order.findById(orderId);
+    if (!order) {
+        throw new Error("Order not found");
+    }
+    return order;
+};
+
+
 // Orders Admin services
 
 async function getAllOrders() {
@@ -32,7 +46,31 @@ async function getAllOrders() {
 	throw new Error('No orders found');
 }
 
+// update Order status
+async function updateOrderStatus(orderId, status) {
+    const order = await Order.findById(orderId);
+    if (!order) {
+        throw new Error('Order not found');
+    }
+    order.status = status;
+    await order.save();
+    return order;
+}
+
+// delete Order by ID
+async function deleteOrderById(orderId) {
+    const order = await Order.findById(orderId);
+    if (!order) {
+        throw new Error('Order not found');
+    }
+    await Order.findByIdAndDelete(orderId);
+    return order;
+}
+
 module.exports = {
     createOrder,
-    getAllOrders
+    getOrderById,
+    getAllOrders,
+    updateOrderStatus,
+    deleteOrderById
 };

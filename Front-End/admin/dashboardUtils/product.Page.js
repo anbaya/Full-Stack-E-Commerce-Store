@@ -2,35 +2,8 @@ const params = new URLSearchParams(window.location.search);
 const productId = params.get("ProductId");
 
 let API_URL = `http://localhost:3000/api/store/products/${productId}`;
-let PRODUCTS_API_URL = "http://localhost:3000/api/store/products";
 console.log("Fetching product with ID:", productId);
 const IMAGE_BASE = "http://localhost:3000/images/";
-
-
-function pickRandom(arr, count) {
-    return arr.sort(() => 0.5 - Math.random()).slice(0, count);
-}
-
-async function loadProducts() {
-    try {
-        const response = await axios.get(PRODUCTS_API_URL);
-        const products = pickRandom(response.data, 10);
-
-        const container = document.getElementById("product-cards");
-
-        container.innerHTML = products.map(product => `
-            <div class="card" data-id="${product._id}">
-                <img src="${IMAGE_BASE + product.images[0]}" alt="${product.name}">
-                <h2>${product.name}</h2>
-                <span class="product-price">$${product.price.toFixed(2)}</span>
-            </div>
-        `).join("");
-    } catch (error) {
-        console.error("Error fetching products:", error);
-        const container = document.getElementById("product-cards");
-        container.innerHTML = `<p class="error-message">Failed to load products. Please try again later.</p>`;
-    }
-}
 
 async function loadProduct() {
     try {
@@ -59,21 +32,33 @@ async function loadProduct() {
     };
 };
 
-// Add event listeners to preview images using event delegation
+const editButton = document.getElementById("edit");
+const deleteButton = document.getElementById("delete");
+
+if (editButton) {
+    editButton.addEventListener("click", () => {
+        window.location.href = `./editProduct.html?ProductId=${productId}`;
+    });
+}
+
+if (deleteButton) {
+    deleteButton.addEventListener("click", async () => {
+        try {
+            await axios.delete(API_URL, {
+                headers: { 'Content-Type': 'application/json' }
+            });
+            alert("Product deleted successfully!");
+            window.location.href = "./products.html";
+        } catch (error) {
+            console.error("Error deleting product:", error);
+        }
+    });
+}
+
 document.addEventListener("click", function (e) {
     if (e.target.classList.contains("preview")) {
         document.getElementById("mainImage").src = e.target.src;
     }
-    else if (e.target.id === "addToCartButton") {
-        if (document.cookie.includes("token")) {
-            alert("Product added to cart!");
-        }else {
-            window.location.href = "./login-page.html";
-        }
-    }
 });
 
-window.onload = () => {
-    loadProduct();
-    loadProducts();
-};
+window.onload = loadProduct;

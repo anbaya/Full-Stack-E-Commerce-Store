@@ -53,7 +53,7 @@ const getProductById = async (req , res) => {
 // Search Products by Name
 const searchProductsByName = async (req, res) => {
 	try {
-		const nameToSearch = req.query.name;
+		const nameToSearch = req.body.name;
 		const products = await productServices.searchByName(nameToSearch);
 		res.status(200).json(products);
 	} catch (error) {
@@ -65,7 +65,16 @@ const searchProductsByName = async (req, res) => {
 const updateProductById = async (req , res) => {
 	try {
 		const {id} = req.params;
-		const product = await productServices.updateProduct(id, req.body);
+		
+		// Prepare update data
+		const updateData = { ...req.body };
+		
+		// Handle uploaded images
+		if (req.files && req.files.length > 0) {
+			updateData.images = req.files.map(file => file.filename);
+		}
+		
+		const product = await productServices.updateProduct(id, updateData);
 		if (!product) {
 			return res.status(404).json({message: "Product not found"});
 		}

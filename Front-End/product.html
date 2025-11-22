@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Products Page</title>
     <link rel="stylesheet" href="style.css"> <!-- Your custom CSS file -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton+SC&family=Playpen+Sans+Arabic:wght@100..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
@@ -20,7 +20,7 @@
                     <a href="home.html">Home</a>
                     <a href="about.html">About</a>
                     <a href="contact.html">Contact</a>
-                    <a href="product.html">Product</a>
+                    <a href="product.html">Products</a>
                 </div>
             </div>
         </nav>
@@ -31,8 +31,14 @@
                 <h2 class="section-title">Our Products</h2>
                 <p class="section-description">Explore our wide range of products designed to meet your needs.</p>
             </div>
+            <form action="search" class="search-bar" id="search-form">
+                <input type="text" placeholder="Search products..." id="search-input">
+            </form>
         </section>
         <div class="flex-cards" id="product-cards"></div>
     </main>
+    <footer class="bottom-bar">
+        <p>&copy; 2025 MyWebsite. All rights reserved.</p>
+    </footer>
 </body>
 </html>

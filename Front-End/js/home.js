@@ -2,10 +2,14 @@ let API_URL = "http://localhost:3000/api/store/products";
 const IMAGE_BASE = "http://localhost:3000/images/";
 
 
+function pickRandom(arr, count) {
+    return arr.sort(() => 0.5 - Math.random()).slice(0, count);
+}
+
 async function loadProducts() {
     try {
         const response = await axios.get(API_URL);
-        const products = response.data;
+        const products = pickRandom(response.data, 10);
 
         const container = document.getElementById("product-cards");
 

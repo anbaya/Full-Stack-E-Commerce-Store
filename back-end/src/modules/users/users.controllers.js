@@ -1,7 +1,7 @@
 const User = require('./user.module');
 const Card = require('../cards/card.module');
 const {register, login} = require('../../sevices/auth.services');
-const {updateUser} = require('./user.services');
+const {updateUser, getUserById: getUserByIdService} = require('./user.services');
 const mailer = require('../../utils/mailer');
 
 // Add User
@@ -105,10 +105,25 @@ const updatedUserById = async (req, res) => {
 	}
 };
 
+// get user by id
+const getUserById = async (req, res) => {
+	try {
+		const { id } = req.params;
+		const user = await getUserByIdService(id);
+		if (!user) {
+			return res.status(404).json({ message: "User not found" });
+		}
+		res.status(200).json(user);
+	} catch (error) {
+		console.error("Error in getUserById controller:", error.message);
+		res.status(500).json({ message: error.message || "Server error" });
+	}
+}
 
 module.exports = {
 	addUser,
 	getAllUsers,
 	updatedUserById,
-	userLogin
+	userLogin,
+	getUserById
 };

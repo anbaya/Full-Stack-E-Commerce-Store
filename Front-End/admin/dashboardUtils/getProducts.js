@@ -21,15 +21,14 @@
                 const card = e.target.closest(".card");
                 if (!card) return;
                 const productId = card.dataset.id;
-                window.location.href = `productPage.html?ProductId=${productId}`;
+                window.location.href = `./productPage.html?ProductId=${productId}`;
             });
         } catch (error) {
             console.error("Error fetching products:", error);
             return [];
         }
     }
-
-        const searchInput = document.getElementById("search-input");
+    const searchInput = document.getElementById("search-input");
     async function search (input) {
             const nameToSearch = input.target.value;
             const response = await axios.post(`${API_URL}/search`, { name: nameToSearch });
@@ -52,6 +51,5 @@
                 </div>
             `).join("");
     });
-
     window.onload = loadProducts;
 }
