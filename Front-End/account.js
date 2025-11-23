@@ -1,7 +1,7 @@
 const USR_URL = "http://localhost:3000/api/users";
 const ORDERS_URL = "http://localhost:3000/api/orders";
 const Address_URL = "http://localhost:3000/api/addresses";
-const TOKEN = document.cookie.split('; ').find(row => row.startsWith('token=')).split('=')[1];
+const TOKEN = document.cookie.split('; ').find(row => row.startsWith('token='))?.split('=')[1];
 
 async function fetchUserData() {
     try {
@@ -9,8 +9,20 @@ async function fetchUserData() {
             headers: { 'Authorization': `Bearer ${TOKEN}` }
         });
         const user = response.data;
-        if (user)
-            return user
+        if (user){
+            document.getElementById("email").innerHTML = `
+                <h3 class="sh">email</h3>
+                <p class="sp" id="totalProducts">${user.email}</p>
+                <button class="card-button">Edit</button>
+            `;
+            document.getElementById("OwnerSummary").innerHTML = `
+                <h3 class="sh">Account Owner</h3>
+                <p class="sp" id="totalOrders">Full name: ${user.firstName} ${user.lastName}</p>
+                <p class="sp" id="totalSales">Username: ${user.username}</p>
+                <button class="card-button">Edit</button>
+            `;
+            return user;
+        }
     } catch (error) {
         console.error("Error fetching user data:", error);
     }
@@ -21,15 +33,28 @@ async function fetchUserAddresses(id) {
         const response = await axios.get(`${Address_URL}/${id}`, {
             headers: { 'Authorization': `Bearer ${TOKEN}` }
         });
-        const addresses = response.data;
-        if (addresses.length === 0) {
-            document.getElementById("AddressSummary").innerHTML = "<p>No addresses found.</p>";
+        const address = response.data;
+        if (!address || address.length === 0) {
+            document.getElementById("AddressSummary").innerHTML = `
+            <p>No addresses found.</p>
+            <button href="add-address.html" class="card-button">Add Address</button>
+            `;
+            return;
         } else {
-            document.getElementById("AddressSummary").innerHTML = addresses.map(address => `
+            document.getElementById("AddressSummary").innerHTML = `
                 <div class="address-card">
-                    <p>${address.street}, ${address.city}, ${address.state}, ${address.zipCode}</p>
-                </div>
-            `).join("");
+                    <h3 class="sh">Saved Address</h3>
+                    <p><b>street: </b> ${address.street}</p>
+                     <p><b>city: </b> ${address.city}</p>
+                      <p><b>state: </b> ${address.state}</p>
+                      <p><b>zip code: </b> ${address.zip}</p>
+                      </div>
+                      <button id="edit-address" class="card-button">Edit</button>
+            `;
+                document.getElementById("edit-address").addEventListener("click", () => {
+                window.location.href = "add-Address.html";
+            });
+            return address;
         }
     } catch (error) {
         console.error("Error fetching user addresses:", error);
@@ -39,6 +64,15 @@ async function fetchUserAddresses(id) {
 window.onload = async () => {
     const user = await fetchUserData();
     if (user) {
-        await fetchUserAddresses(user._id);
+        const address = await fetchUserAddresses(user.address);
+        if (!address || address.length === 0) {
+            document.getElementById("AddressSummary").innerHTML = `
+            <p>No addresses found.</p>
+            <button id="edit-address" href="add-address.html" class="card-button">Add Address</button>
+            `;
+            document.getElementById("edit-address").addEventListener("click", () => {
+                window.location.href = "add-Address.html";
+            });
+        }
     }
 }

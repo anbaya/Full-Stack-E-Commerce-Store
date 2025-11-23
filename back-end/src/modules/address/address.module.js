@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const addressSchema = new mongoose.Schema({
-	name: {
+	fullName: {
 		type: String,
 		required: [true, "Name is required"]
 	},

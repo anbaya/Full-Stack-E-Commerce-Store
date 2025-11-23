@@ -43,15 +43,18 @@ if (editButton) {
 
 if (deleteButton) {
     deleteButton.addEventListener("click", async () => {
-        try {
-            await axios.delete(API_URL, {
-                headers: { 'Content-Type': 'application/json' }
-            });
-            alert("Product deleted successfully!");
-            window.location.href = "./product.html";
-        } catch (error) {
-            console.error("Error deleting product:", error);
+        if (!confirm("Are you sure you want to delete this product?")) {
+            return;
         }
+            try {
+                await axios.delete(API_URL, {
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                alert("Product deleted successfully!");
+                window.location.href = "./product.html";
+            } catch (error) {
+                console.error("Error deleting product:", error);
+            }
     });
 }
 

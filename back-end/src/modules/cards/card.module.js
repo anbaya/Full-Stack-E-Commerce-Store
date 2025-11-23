@@ -1,8 +1,13 @@
 const mongoose = require('mongoose');
+const Product = require('../products/product.module');
 
 const cardSchema = new mongoose.Schema({
 	cardItems: [
 		{
+			ProductName: {
+				type: String,
+				required: true
+			},
 			productId: {
 				type: mongoose.Schema.Types.ObjectId,
 				ref: 'Product',
@@ -12,6 +17,10 @@ const cardSchema = new mongoose.Schema({
 				type: Number,
 				required: true,
 				default: 1
+			},
+			productTotal: {
+				type: Number,
+				required: true
 			}
 		}
 	],

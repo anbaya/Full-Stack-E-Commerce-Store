@@ -68,15 +68,18 @@ document.addEventListener("click", async (e) => {
             window.location.href = `./orderDetails.html?orderId=${orderId}`;
             return;
         }else if (e.target.textContent === "Delete Order") {
+            if (!confirm("Are you sure you want to delete this order? This action cannot be undone.")) {
+                return;
+            }
             try {
                 await axios.delete(`${order_URL}/${orderId}`);
                 alert("Order deleted successfully!");
                 fetchOrders(); // Refresh the order list
             } catch (error) {
-                console.error("Error deleting order:", error);
-                alert("Failed to delete order. Please try again.");
-            }
-            return;
+                    console.error("Error deleting order:", error);
+                    alert("Failed to delete order. Please try again.");
+                }
+                return;
         }
         try {
             await axios.put(`${order_URL}/update-status/${orderId}`, { status: newStatus });

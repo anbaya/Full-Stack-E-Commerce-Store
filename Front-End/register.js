@@ -19,11 +19,13 @@ async function registerUser(details) {
 
 document.getElementById('register-Form').addEventListener('submit', async (event) => {
     event.preventDefault();
-    const name = document.getElementById('name').value;
+    const firstName = document.getElementById('first-name').value;
+    const lastName = document.getElementById('last-name').value;
+    const username = document.getElementById('username').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     try {
-        const user = await registerUser({ name, email, password });
+        const user = await registerUser({ firstName, lastName, username, email, password });
         document.cookie = `token=${user.token}; path=/;`;
         console.log('Registration successful:', user);
         window.location.href = './home.html';

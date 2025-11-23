@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>order Details</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="../../general-images/icon.png" type="image/png">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./orderDetails.js" defer></script>
+</head>
+<body>
+    <main>
+        <nav>
+            <div class="nav-container">
+                <h2 class="logo">D.Seller</h2>
+                <div class="menu">
+                    <a href="dashboard.html">Dashboard</a>
+                    <a href="home.html">Home</a>
+                    <a href="about.html">About</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="product.html">Product</a>
+                </div>
+            </div>
+        </nav>
+        <section class="main-section">
+            <h1>Order Details</h1>
+            <div id="order-details">
+                <!-- Order details will be dynamically populated here -->
+            </div>
+            <div class="order-products">
+                <h2>Products in this Order</h2>
+                <div id="products-list">
+                    <!-- Products will be dynamically populated here -->
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

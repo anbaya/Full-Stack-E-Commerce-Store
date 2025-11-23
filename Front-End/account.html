@@ -6,6 +6,7 @@
     <title>Account Dashboard</title>
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="dashboard.css">
+    <link rel="icon" href="general-images/icon.png" type="image/png">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="account.js" defer></script>
@@ -15,10 +16,11 @@
             <div class="nav-container">
                 <h2 class="logo">D.Seller</h2>
                 <div class="menu">
+                    <a href="cart.html">Cart</a>
                     <a href="home.html">Home</a>
+                    <a href="product.html">Products</a>
                     <a href="about.html">About</a>
                     <a href="contact.html">Contact</a>
-                    <a href="product.html">Products</a>
                 </div>
             </div>
         </nav>
@@ -26,7 +28,7 @@
         <section id="dashboard" aria-labelledby="admin-dashboard-heading">
             <div id="dashList">
                 <ul>
-                    <li><a href="orderManager.html">Manage Orders</a></li>
+                    <li><a href="user-orders.html">Manage Orders</a></li>
                     <li><a href="account.html">Manage account</a></li>
                 </ul>
             </div>
@@ -49,7 +51,7 @@
                     <div id="AddressSummary" class="summary-box">
                         <h3 class="sh">Address</h3>
                         <p class="sp" id="totalUsers">123 Main St, Anytown, USA</p>
-                        <button class="card-button">Edit</button>
+                        <button id="edit-address" class="card-button">Edit</button>
                     </div>
                     <div id="messagesSummary" class="summary-box">
                         <h3 class="sh">Messages Summary</h3>

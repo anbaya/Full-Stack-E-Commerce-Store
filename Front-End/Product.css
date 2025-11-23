@@ -20,6 +20,7 @@
 }
 
 #previewImages {
+    display: flex;
     margin-top: 15px;
     display: flex;
     gap: 10px;
@@ -57,5 +58,9 @@
 
     #previewImages {
         justify-content: center;
+    }
+    .preview {
+        width: 60px;
+        height: 60px;
     }
 }

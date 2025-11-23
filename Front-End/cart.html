@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place Order</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+    <script defer src="order.js"></script>
+</head>
+<body>
+        <nav>
+            <div class="nav-container">
+                <h2 class="logo">D.Seller</h2>
+                <div class="menu">
+                    <a href="home.html">Home</a>
+                    <a href="product.html">Products</a>
+                    <a href="account.html">Account</a>
+                    <a href="about.html">About</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </div>
+        </nav>
+    <main class="main-content">
+        <section class="main-container">
+            <h1 class="title">Your Cart</h1>
+            <section class="cart-products-container">
+                <div id="cart-items">
+                    <!-- Cart items will be dynamically inserted here -->
+                </div>
+                <div class="spacer" id="total-price">
+                    <h2>Total Price: $<span id="total-amount">0.00</span></h2>
+                </div>
+            </section>
+            <form class="place-order-section" id="order-form">
+                <div class="spacer">
+                    <h2>Choose your payment method:</h2>
+                    <select name="paymentMethod" id="payment-method">
+                        <option value="credit-card">Credit Card</option>
+                        <option value="paypal">PayPal</option>
+                        <option value="bank-transfer">Bank Transfer</option>
+                    </select>
+                </div>
+                <div class="spacer">
+                    <h2>Choose your shipping method:</h2>
+                    <select name="shippingMethod" id="shipping-method">
+                        <option value="standard">Standard Shipping</option>
+                        <option value="express">Express Shipping</option>
+                        <option value="overnight">Overnight Shipping</option>
+                    </select>
+                </div>
+                <div id="order-buttons" class="spacer">
+                    <button class="button" type="submit" id="place-order-btn">Place Order</button>
+                    <button class="button" type="button" id="clear-cart-btn">Clear Cart</button>
+                </div>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

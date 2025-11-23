@@ -2,9 +2,18 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
-	name: {
+	firstName: {
 		type: String,
 		required: true
+	},
+	lastName: {
+		type: String,
+		required: true
+	},
+	username: {
+		type: String,
+		required: true,
+		unique: true
 	},
 	type: {
 		type: String,
@@ -25,18 +34,16 @@ const userSchema = new mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Card'
 	},
-	purchasedProducts: [
+	orders: [
 		{
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'Product'
 		}
 	],
-	address: [
-		{
+	address: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'Address'
 		}
-	]
 }, { timestamps: true });
 
 userSchema.pre('save', async function(next){
