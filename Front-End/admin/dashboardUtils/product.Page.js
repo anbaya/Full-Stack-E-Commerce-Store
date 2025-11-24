@@ -1,9 +1,9 @@
 const params = new URLSearchParams(window.location.search);
 const productId = params.get("ProductId");
 
-let API_URL = `http://process.env.HOST:3000/api/store/products/${productId}`;
+let API_URL = `http://52.90.2.111:3000/api/store/products/${productId}`;
 console.log("Fetching product with ID:", productId);
-const IMAGE_BASE = "http://process.env.HOST:3000/images/";
+const IMAGE_BASE = "http://52.90.2.111:3000/images/";
 
 async function loadProduct() {
     try {

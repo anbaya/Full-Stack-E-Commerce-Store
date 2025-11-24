@@ -2,7 +2,7 @@
     const params = new URLSearchParams(window.location.search);
     const orderId = params.get("orderId");
 
-    const URL = `http://process.env.HOST:3000/api/orders/${orderId}`;
+    const URL = `http://52.90.2.111:3000/api/orders/${orderId}`;
 
     function displayOrderDetails(order, user) {
         const orderDetailsSection = document.getElementById("order-details");
@@ -31,7 +31,7 @@
 
     async function getUserData(userId) {
         try {
-            const response = await axios.get(`http://process.env.HOST:3000/api/users/${userId}`);
+            const response = await axios.get(`http://52.90.2.111:3000/api/users/${userId}`);
             return response.data;
         } catch (error) {
             console.error("Error fetching user data:", error);
