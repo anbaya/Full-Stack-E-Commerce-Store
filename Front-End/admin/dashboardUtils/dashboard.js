@@ -1,6 +1,6 @@
-const statusURL = 'http://localhost:3000/api/dashboard/status';
-const ordersURL = 'http://localhost:3000/api/dashboard/orders';
-const salesURL = 'http://localhost:3000/api/dashboard/total-sales';
+const statusURL = 'http://process.env.HOST:3000/api/dashboard/status';
+const ordersURL = 'http://process.env.HOST:3000/api/dashboard/orders';
+const salesURL = 'http://process.env.HOST:3000/api/dashboard/total-sales';
 
 
 const getDashboardStatus = async () => {

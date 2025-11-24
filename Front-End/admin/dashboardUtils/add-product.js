@@ -1,5 +1,5 @@
 {
-    const URL = "http://localhost:3000/api/store/products";
+    const URL = "http://process.env.HOST:3000/api/store/products";
 
     document.getElementById("add-product-form").addEventListener("submit", async (e) => {
         e.preventDefault();

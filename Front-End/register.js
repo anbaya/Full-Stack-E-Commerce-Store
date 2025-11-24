@@ -1,4 +1,4 @@
-const register_URL = 'http://localhost:3000/api/users/register';
+const register_URL = 'http://process.env.HOST:3000/api/users/register';
 
 async function registerUser(details) {
     try {

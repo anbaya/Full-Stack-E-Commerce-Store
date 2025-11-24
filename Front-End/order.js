@@ -1,7 +1,7 @@
-const ORDER_URL = 'http://localhost:3000/api/orders/place-order';
-const CART_URL = 'http://localhost:3000/api/cards';
-const PRODUCTS_API_URL = 'http://localhost:3000/api/store/products';
-const USER_URL = 'http://localhost:3000/api/users';
+const ORDER_URL = 'http://process.env.HOST:3000/api/orders/place-order';
+const CART_URL = 'http://process.env.HOST:3000/api/cards';
+const PRODUCTS_API_URL = 'http://process.env.HOST:3000/api/store/products';
+const USER_URL = 'http://process.env.HOST:3000/api/users';
 const TOKEN = document.cookie.split('; ').find(row => row.startsWith('token='))?.split('=')[1];
 
 async function getUserData(token) {

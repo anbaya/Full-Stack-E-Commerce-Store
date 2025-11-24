@@ -1,6 +1,6 @@
 {
-    const API_URL = "http://localhost:3000/api/store/products";
-    const IMAGE_BASE = "http://localhost:3000/images/";
+    const API_URL = "http://process.env.HOST:3000/api/store/products";
+    const IMAGE_BASE = "http://process.env.HOST:3000/images/";
 
 
     async function loadProducts() {

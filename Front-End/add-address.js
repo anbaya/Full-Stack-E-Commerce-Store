@@ -1,6 +1,6 @@
-const addAddress_URL = 'http://localhost:3000/api/addresses';
+const addAddress_URL = 'http://process.env.HOST:3000/api/addresses';
 const TOKEN = document.cookie.split('; ').find(row => row.startsWith('token='))?.split('=')[1];
-const USER_URL = 'http://localhost:3000/api/users/me';
+const USER_URL = 'http://process.env.HOST:3000/api/users/me';
 
 async function getUser(token) {
     try {
@@ -27,7 +27,7 @@ async function addAddress(addressData, userId) {
         if (response.status === 201) {
             const user = await getUser(TOKEN);
             user.address = response.data._id;
-            await axios.put(`http://localhost:3000/api/users/${user._id}`, user, {
+            await axios.put(`http://process.env.HOST:3000/api/users/${user._id}`, user, {
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${TOKEN}`

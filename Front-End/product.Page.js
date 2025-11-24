@@ -1,10 +1,10 @@
 const params = new URLSearchParams(window.location.search);
 const productId = params.get("ProductId");
 
-let API_URL = `http://localhost:3000/api/store/products/${productId}`;
-let PRODUCTS_API_URL = "http://localhost:3000/api/store/products";
+let API_URL = `http://process.env.HOST:3000/api/store/products/${productId}`;
+let PRODUCTS_API_URL = "http://process.env.HOST:3000/api/store/products";
 const TOKEN = document.cookie.split('; ').find(row => row.startsWith('token='))?.split('=')[1];
-const IMAGE_BASE = "http://localhost:3000/images/";
+const IMAGE_BASE = "http://process.env.HOST:3000/images/";
 
 
 function pickRandom(arr, count) {
@@ -16,7 +16,7 @@ async function checkIdentity() {
         if (!TOKEN) {
             return false;
         }
-        const response = await axios.get("http://localhost:3000/api/users/me", {
+        const response = await axios.get("http://process.env.HOST:3000/api/users/me", {
             headers: {'Authorization': `Bearer ${TOKEN}`}
         });
         return response.status === 200;
@@ -31,7 +31,7 @@ async function getUser() {
         if (!TOKEN) {
             return null;
         }
-        const response = await axios.get("http://localhost:3000/api/users/me", {
+        const response = await axios.get("http://process.env.HOST:3000/api/users/me", {
             headers: {'Authorization': `Bearer ${TOKEN}`}
         });
         if (response.status === 200) {
@@ -53,14 +53,14 @@ async function AddToCart(perchaseInfo) {
         }
         perchaseInfo.cartId = user.card;
         console.log("card is before request:", perchaseInfo.cartId);
-        const response = await axios.post("http://localhost:3000/api/cards/add-to-cart", perchaseInfo, {
+        const response = await axios.post("http://process.env.HOST:3000/api/cards/add-to-cart", perchaseInfo, {
             headers: {
                 'Content-Type': 'application/json',
             }
         });
         if (user.card != response.data.card._id) {
             user.card = response.data.card._id;
-            await axios.put(`http://localhost:3000/api/users/${user._id}`, { card: user.card }, {
+            await axios.put(`http://process.env.HOST:3000/api/users/${user._id}`, { card: user.card }, {
                 headers: {
                     'Content-Type': 'application/json',
                 }

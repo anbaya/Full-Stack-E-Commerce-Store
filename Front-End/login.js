@@ -1,4 +1,4 @@
-const login_URL = 'http://localhost:3000/api/users/login';
+const login_URL = 'http://process.env.HOST:3000/api/users/login';
 
 async function loginUser(credentials) {
     try {

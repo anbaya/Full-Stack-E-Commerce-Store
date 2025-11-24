@@ -1,6 +1,6 @@
-const USR_URL = "http://localhost:3000/api/users";
-const ORDERS_URL = "http://localhost:3000/api/orders";
-const Address_URL = "http://localhost:3000/api/addresses";
+const USR_URL = "http://process.env.HOST:3000/api/users";
+const ORDERS_URL = "http://process.env.HOST:3000/api/orders";
+const Address_URL = "http://process.env.HOST:3000/api/addresses";
 const TOKEN = document.cookie.split('; ').find(row => row.startsWith('token='))?.split('=')[1];
 
 async function fetchUserData() {

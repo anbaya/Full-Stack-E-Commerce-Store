@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:3000/api";
+const API_BASE = "http://process.env.HOST:3000/api";
 
 async function apiGet(endpoint) {
     const response = await fetch(`${API_BASE}/${endpoint}`);
