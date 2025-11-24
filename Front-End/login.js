@@ -1,4 +1,4 @@
-const login_URL = 'http://52.90.2.111:3000/api/users/login';
+const login_URL = '/api/users/login';
 
 async function loginUser(credentials) {
     try {

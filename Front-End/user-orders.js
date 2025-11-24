@@ -1,6 +1,6 @@
-const USR_URL = "http://52.90.2.111:3000/api/users";
-const ORDERS_URL = "http://52.90.2.111:3000/api/orders";
-const Address_URL = "http://52.90.2.111:3000/api/addresses";
+const USR_URL = "/api/users";
+const ORDERS_URL = "/api/orders";
+const Address_URL = "/api/addresses";
 const TOKEN = document.cookie.split('; ').find(row => row.startsWith('token='))?.split('=')[1];
 
 async function fetchUserData() {

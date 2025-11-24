@@ -1,5 +1,5 @@
-let API_URL = "http://52.90.2.111:3000/api/store/products";
-const IMAGE_BASE = "http://52.90.2.111:3000/images/";
+let API_URL = "/api/store/products";
+const IMAGE_BASE = "/images/";
 
 
 function pickRandom(arr, count) {

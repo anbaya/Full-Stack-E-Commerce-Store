@@ -1,4 +1,4 @@
-const API_BASE = "http://52.90.2.111:3000/api";
+const API_BASE = "/api";
 
 async function apiGet(endpoint) {
     const response = await fetch(`${API_BASE}/${endpoint}`);

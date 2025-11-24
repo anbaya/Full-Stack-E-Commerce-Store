@@ -1,4 +1,4 @@
-const order_URL = "http://52.90.2.111:3000/api/orders";
+const order_URL = "/api/orders";
 
 
 const orderListSection = document.getElementById("order-list");
@@ -6,7 +6,7 @@ const orderListSection = document.getElementById("order-list");
 
 async function getUserData(userId) {
     try {
-        const response = await axios.get(`http://52.90.2.111:3000/api/users/${userId}`);
+        const response = await axios.get(`/api/users/${userId}`);
         return response.data;
     } catch (error) {
         console.error("Error fetching user data:", error);
@@ -16,7 +16,7 @@ async function getUserData(userId) {
 
 async function fetchProducts(id) {
     try {
-        const response = await axios.get(`http://52.90.2.111:3000/api/store/products/${id}`);
+        const response = await axios.get(`/api/store/products/${id}`);
         return response.data;
     } catch (error) {
         console.error("Error fetching product data:", error);

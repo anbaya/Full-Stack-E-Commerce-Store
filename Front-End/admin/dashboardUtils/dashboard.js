@@ -1,6 +1,6 @@
-const statusURL = 'http://52.90.2.111:3000/api/dashboard/status';
-const ordersURL = 'http://52.90.2.111:3000/api/dashboard/orders';
-const salesURL = 'http://52.90.2.111:3000/api/dashboard/total-sales';
+const statusURL = '/api/dashboard/status';
+const ordersURL = '/api/dashboard/orders';
+const salesURL = '/api/dashboard/total-sales';
 
 
 const getDashboardStatus = async () => {

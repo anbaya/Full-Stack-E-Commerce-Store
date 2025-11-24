@@ -2,7 +2,7 @@
     const params = new URLSearchParams(window.location.search);
     const productId = params.get("ProductId");
 
-    const URL = `http://52.90.2.111:3000/api/store/products/${productId}`;
+    const URL = `/api/store/products/${productId}`;
     document.getElementById("add-product-form").addEventListener("submit", async (e) => {
         e.preventDefault();
 
