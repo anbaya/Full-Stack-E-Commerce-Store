@@ -74,5 +74,9 @@ window.onload = async () => {
                 window.location.href = "add-Address.html";
             });
         }
+    }else{
+            alert('User not authenticated. Please log in.');
+            window.location.href = 'login-page.html';
+            return;
     }
 }

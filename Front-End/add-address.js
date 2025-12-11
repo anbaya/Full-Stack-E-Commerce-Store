@@ -57,6 +57,7 @@ document.getElementById('address-Form').addEventListener('submit', async (event)
         const user = await getUser(TOKEN);
         if (!user) {
             alert('User not authenticated. Please log in.');
+            window.location.href = 'login-page.html';
             return;
         }
         const addedAddress = await addAddress(addressData, user._id);

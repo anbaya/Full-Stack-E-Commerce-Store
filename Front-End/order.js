@@ -57,6 +57,7 @@ const orderForm = document.getElementById('order-form').addEventListener('submit
     const user = await getUserData(TOKEN);
     if (!user) {
         alert('User not authenticated. Please log in.');
+        window.location.href = 'login-page.html';
         return;
     }
     const cart = await getCartData(user.card);
@@ -99,6 +100,7 @@ async function initializeOrderPage() {
     const user = await getUserData(TOKEN);
     if (!user) {
         alert('User not authenticated. Please log in.');
+        window.location.href = 'login-page.html';
         return;
     }
     const cart = await getCartData(user.card);
@@ -129,6 +131,7 @@ document.getElementById('clear-cart-btn').addEventListener('click', async (e) =>
             const user = await getUserData(TOKEN);
             if (!user) {
                 alert('User not authenticated. Please log in.');
+                window.location.href = 'login-page.html';
                 return;
             }
             await axios.delete(`${CART_URL}/${user.card}`, {
