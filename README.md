@@ -1,6 +1,7 @@
 # Full-Stack E-Commerce Store
 
 A full-stack e-commerce application built with Node.js, Express, MongoDB, and vanilla JavaScript. This project features a complete online shopping experience with user authentication, product management, shopping cart functionality, order processing, and an admin dashboard.
+take a look at the live demo: 👉 https://www.deseller.run.place
 
 ## 🚀 Features
 
