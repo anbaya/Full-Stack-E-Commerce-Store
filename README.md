@@ -29,6 +29,7 @@ take a look at the live demo: 👉 https://www.deseller.run.place
 - **Multer**: File upload handling
 - **Nodemailer**: Email notifications
 - **Axios**: HTTP client
+- **Jest**: Unit testing framework
 
 ### Frontend
 - **HTML5**: Structure
@@ -69,6 +70,7 @@ Full-Stack-E-Commerce-Store/
 │   │   ├── app.js                 # Express app setup
 │   │   └── server.js              # Server entry point
 │   ├── .env                       # Environment variables
+│   ├── Dockerfile                 # Backend container image
 │   └── package.json
 │
 ├── db/
@@ -151,6 +153,18 @@ Full-Stack-E-Commerce-Store/
    docker-compose down
    ```
 
+### Running Tests
+The project uses Jest for unit testing.
+1. Ensure dependencies are installed in the backend folder:
+   ```bash
+   cd back-end
+   npm install
+   ```
+2. Run the tests:
+   ```bash
+   npm test
+   ```
+
 ## 🐳 Docker Architecture
 
 The application runs as three Docker containers orchestrated by Docker Compose:
@@ -181,6 +195,9 @@ tar czvf backup.tar.gz data/
 All services communicate over an internal Docker bridge network (`app`). The frontend Nginx container is the only service exposed to the host, acting as a reverse proxy that forwards `/api/*` and `/images/*` requests to the backend.
 
 ## 📡 API Endpoints
+
+### System
+- `GET /api/health` - Check comprehensive system health (Database, Mailer, FS, Config)
 
 ### Authentication
 - `POST /api/users/register` - Register new user

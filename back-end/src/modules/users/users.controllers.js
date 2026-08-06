@@ -1,6 +1,6 @@
 const User = require('./user.module');
 const Card = require('../cards/card.module');
-const auth = require('../../sevices/auth.services');
+const auth = require('../../services/auth.services');
 const {updateUser, getUserById: getUserByIdService} = require('./user.services');
 const mailer = require('../../utils/mailer');
 

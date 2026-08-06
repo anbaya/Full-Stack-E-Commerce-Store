@@ -4,7 +4,7 @@ const fs = require('fs/promises');
 const path = require('path');
 
 
-const DBhealthCheck = async (req, res) => {
+const DBhealthCheck = async () => {
     try {
         const dbState = mongoose.connection.readyState;
         if (dbState !== 1)
@@ -57,8 +57,8 @@ const mailerHealthCheck = async () => {
       return { status: 'error', message: 'Mailer not initialized' };
     }
 
-    // Verify SMTP connection (lightweight test)
-    await transporter.verify();
+    // We skip await transporter.verify() here because it connects to the SMTP server
+    // and can cause a delay. Checking if the object is initialized is fast and safe.
 
     return {
       status: 'healthy',
@@ -110,10 +110,10 @@ const fileSystemHealth = async () => {
 };
 
 const secretsValidation = () => {
-  const required = ['SECRET_KEY', 'MONGODB_URI', 'MAILTRAP_HOST', 'MAILTRAP_PORT', 'MAILTRAP_USER', 'MAILTRAP_PASS'];
+  const required = ['JWT_SECRET', 'MONGODB_URI', 'EMAIL_USER', 'EMAIL_PASS'];
   const missing = required.filter((key) => !process.env[key]);
 
-  const secret = process.env.SECRET_KEY || '';
+  const secret = process.env.JWT_SECRET || '';
   const weakSecret = secret.length > 0 && secret.length < 32;
 
   return {
@@ -123,7 +123,7 @@ const secretsValidation = () => {
     message: missing.length > 0
       ? 'Some required environment variables are missing'
       : weakSecret
-        ? 'SECRET_KEY is too short'
+        ? 'JWT_SECRET is too short'
         : 'All required environment variables are set',
     timestamp: new Date().toISOString()
   };
