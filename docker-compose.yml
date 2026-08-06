@@ -1,0 +1,39 @@
+services:
+  db:
+    build: ./db
+    networks:
+      - app
+    volumes:
+      - db_data:/data/db
+  back-end:
+    build: ./back-end
+    networks:
+      - app
+    depends_on:
+      - db
+    volumes:
+      - product_images:/app/src/modules/products/productsImages
+  front-end:
+    build: ./Front-End
+    networks:
+      - app
+    ports:
+      - "8000:80"
+
+networks:
+  app:
+    driver: bridge
+
+volumes:
+  db_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./data/database-data
+  product_images:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./data/uploaded-images

@@ -6,6 +6,7 @@ const orderRoutes = require ('../modules/orders/order.routes.js');
 const mailRoutes = require ('../utils/mail.routes.js');
 const dashboardRoutes = require ('../modules/dashboard/dashboard.routes.js');
 const addressRoutes = require ('../modules/address/address.routes.js');
+const health = require('../utils/health.js');
 
 const router = express.Router();
 
@@ -16,5 +17,6 @@ router.use('/orders', orderRoutes);
 router.use('/mail', mailRoutes);
 router.use('/dashboard', dashboardRoutes);
 router.use('/addresses', addressRoutes);
+router.get('/health', health);
 
 module.exports = router;

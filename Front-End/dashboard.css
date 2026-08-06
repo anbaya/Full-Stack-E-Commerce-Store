@@ -2,89 +2,124 @@
     display: flex;
     flex-direction: row;
     width: 100%;
+    min-height: 90vh;
+    gap: 30px;
+    padding: 40px 5%;
 }
 
 #dashList {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    width: 20%;
-    height: 100vh;
-    padding: 20px;
-    background-color: var(--primary-color);
-    border: 2px solid var(--text-color);
+    width: 25%;
+    padding: 30px 20px;
+    background: var(--card-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    height: fit-content;
 }
 
 #dashList ul {
     list-style: none;
     padding: 0;
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 #dashList ul li {
-    margin: 20px 0;
+    margin: 0;
     width: 100%;
     font-family: var(--font-family);
-    font-weight: bold;
 }
 
 #dashList ul li a {
-    font-size: 18px;
+    font-size: 16px;
+    font-weight: 500;
     text-decoration: none;
-    color: var(--text-color);
+    color: var(--text-muted);
+    display: block;
+    padding: 12px 18px;
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid transparent;
 }
 
 #dashList ul li a:hover {
-    color: var(--accent-color);
+    color: var(--accent-gold);
+    background: rgba(212, 163, 89, 0.08);
+    border-color: rgba(212, 163, 89, 0.15);
+    transform: translateX(4px);
 }
 
-#dashboard-heading{
+#dashboard-heading {
     font-family: var(--font-family);
-    font-size: 28px;
-    margin-bottom: 20px;
-    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--accent-gold);
+    margin-bottom: 30px;
+    text-shadow: none;
 }
 
 #summaries {
     display: flex;
     flex-direction: column;
-    width: 80%;
-    padding: 5px; /* changed from margin */
+    width: 75%;
+    gap: 30px;
 }
 
 .summaries-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+    width: 100%;
 }
 
 .summary-box {
-    width: 300px;
-    height: auto;
-    margin: 5px;
-    padding: 20px;
-    border-radius: 10px;
-    background: #f9f9f9;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 30px 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.summary-box:hover {
+    border-color: var(--glass-border-hover);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
 }
 
 .sh {
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 10px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--accent-gold);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
 }
 
 .sp {
-    font-size: 18px;
-    color: #555;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #ffffff;
+    text-align: center;
+    margin: 5px 0 15px 0;
 }
 
 .product-search-container {
-   display: flex;
+    display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -92,66 +127,95 @@
 }
 
 .search-button {
-    padding: 10px 15px;
-    border: 1px solid var(--text-color);
-    border-radius: 5px;
-    background-color: var(--button-color);
-    color: var(--button-text-color);
-    font-family: var(--font-family);
+    padding: 12px 24px;
+    background: var(--button-gradient);
+    color: #120e0a;
+    font-weight: 700;
+    border: none;
+    border-radius: 12px;
     cursor: pointer;
-    margin-top: 50px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(212, 163, 89, 0.2);
 }
 
-.search-button a{
+.search-button a {
     text-decoration: none;
     color: inherit;
 }
-
 
 .main-section {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
     width: 100%;
-    padding: 20px;
+    gap: 20px;
 }
 
 .order {
     width: 100%;
-    margin: 20px;
-    padding: 10px;
-    border: 1px solid var(--text-color);
-    border-radius: 10px;
-    background-color: #f9f9f9;
+    padding: 25px;
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    background: rgba(12, 9, 6, 0.4);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: all 0.3s ease;
+}
+
+.order:hover {
+    border-color: var(--glass-border-hover);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .order-button {
-  background-color: var(--button-color);
-  padding: 8px;
-  margin-top: 10px;
-  border-radius: 10px;
-  color: var(--button-text-color);
-  font-family: var(--font-family);
+    align-self: flex-start;
+    margin-top: 5px;
 }
 
-.product{
-    margin: 10px 0;
+.product {
+    margin: 15px 0;
     width: 100%;
-    border-top: 1px solid var(--text-color);
-    border-bottom: 1px solid var(--text-color);
-    padding: 10px;
+    border-top: 1px solid var(--glass-border);
+    border-bottom: 1px solid var(--glass-border);
+    padding: 15px 0;
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
-@media (max-width: 768px) {
-    #dashList {
-        width: 30%;
-        height: auto;
+@media (max-width: 992px) {
+    #dashboard {
         flex-direction: column;
-        /* overflow-x: auto; */
+        padding: 20px 15px;
+        gap: 25px;
     }
-    .summary-container {
-        width: 70%;
-        margin: 5px;
+    
+    #dashList {
+        width: 100%;
+        height: auto;
+        padding: 20px;
+    }
+    
+    #dashList ul {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    #dashList ul li {
+        width: auto;
+    }
+    
+    #dashList ul li a {
+        padding: 8px 14px;
+        font-size: 14px;
+    }
+    
+    #summaries {
+        width: 100%;
     }
 }

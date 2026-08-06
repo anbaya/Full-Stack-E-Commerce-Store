@@ -36,6 +36,11 @@ take a look at the live demo: 👉 https://www.deseller.run.place
 - **Vanilla JavaScript**: Dynamic functionality
 - **Axios**: API requests
 
+### Infrastructure
+- **Docker** & **Docker Compose**: Containerization and orchestration
+- **Nginx**: Reverse proxy and static file serving
+- **Named Bind Volumes**: Persistent data storage for database and uploaded images
+
 ## 📁 Project Structure
 
 ```
@@ -56,83 +61,124 @@ Full-Stack-E-Commerce-Store/
 │   │   ├── routes/
 │   │   │   └── index.js           # Main router
 │   │   ├── services/
-│   │   │   └── auth.services.js   # Authentication logic
+│   │   │   ├── auth.services.js   # Authentication logic
+│   │   │   └── health.services.js # Health checks logic
 │   │   ├── utils/
 │   │   │   ├── mailer.js          # Email configuration
 │   │   │   └── mail.services.js   # Email sending logic
 │   │   ├── app.js                 # Express app setup
 │   │   └── server.js              # Server entry point
+│   ├── .env                       # Environment variables
 │   └── package.json
 │
-└── Front-End/
-    ├── admin/
-    │   ├── dashboardUtils/
-    │   │   ├── dashboard.html     # Admin dashboard
-    │   │   ├── addProduct.html    # Add product form
-    │   │   ├── editProduct.html   # Edit product form
-    │   │   └── product.html       # Admin product list
-    │   └── admin.html
-    ├── home.html                  # Homepage
-    ├── product.html               # Product listing
-    ├── productPage.html           # Product details
-    ├── order.html                 # Order checkout
-    ├── account.html               # User account
-    ├── contact.html               # Contact page
-    ├── about.html                 # About page
-    ├── js/
-    │   ├── api.js                 # API configuration
-    │   └── home.js                # Homepage logic
-    └── styles/
-        └── style.css              # Main stylesheet
+├── db/
+│   ├── dump/
+│   │   └── storedb/               # BSON data files for seeding
+│   ├── init.sh                    # Database initialization script
+│   └── dockerfile                 # MongoDB container image
+│
+├── Front-End/
+│   ├── admin/
+│   │   ├── dashboardUtils/
+│   │   │   ├── dashboard.html     # Admin dashboard
+│   │   │   ├── addProduct.html    # Add product form
+│   │   │   ├── editProduct.html   # Edit product form
+│   │   │   └── product.html       # Admin product list
+│   │   └── admin.html
+│   ├── home.html                  # Homepage
+│   ├── product.html               # Product listing
+│   ├── productPage.html           # Product details
+│   ├── order.html                 # Order checkout
+│   ├── account.html               # User account
+│   ├── contact.html               # Contact page
+│   ├── about.html                 # About page
+│   ├── nginx.conf                 # Nginx reverse proxy config
+│   ├── js/
+│   │   ├── api.js                 # API configuration
+│   │   └── home.js                # Homepage logic
+│   └── styles/
+│       └── style.css              # Main stylesheet
+│
+├── data/
+│   ├── database-data/             # Persistent MongoDB data (bind mount)
+│   └── uploaded-images/           # Persistent product images (bind mount)
+│
+└── docker-compose.yml             # Container orchestration
 ```
 
 ## 🔧 Installation & Setup
 
 ### Prerequisites
-- Node.js (v14 or higher)
-- MongoDB (local or Atlas)
-- npm or yarn
+- **Docker** & **Docker Compose** installed on your machine
 
-### Backend Setup
+### Quick Start (Docker)
 
 1. **Clone the repository**
    ```bash
    git clone https://github.com/anbaya/Full-Stack-E-Commerce-Store.git
-   cd Full-Stack-E-Commerce-Store/back-end
+   cd Full-Stack-E-Commerce-Store
    ```
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Configure environment variables**
-   Create a `.env` file in the `back-end` directory:
+2. **Configure environment variables**
+   Create a `.env` file in the `back-end/` directory:
    ```env
    PORT=3000
-   MONGODB_URI=your_mongodb_connection_string
+   MONGODB_URI=mongodb://db:27017/storedb
    JWT_SECRET=your_jwt_secret_key
    EMAIL_USER=your_email@example.com
    EMAIL_PASS=your_email_password
    ```
 
-4. **Start the server**
+3. **Start the application**
    ```bash
-   npm run dev    # Development mode with nodemon
-   # or
-   npm start      # Production mode
+   docker-compose up -d
+   ```
+   This will build and start all three services (database, backend, frontend).
+   The database is automatically seeded with initial data on first run.
+
+4. **Access the application**
+   - Frontend: `http://localhost:8000`
+   - Backend API: `http://localhost:8000/api/`
+
+5. **View logs**
+   ```bash
+   docker-compose logs -f back-end   # Backend logs only
+   docker-compose logs -f             # All services
    ```
 
-### Frontend Setup
-
-1. **Navigate to the Frontend directory**
+6. **Stop the application**
    ```bash
-   cd ../Front-End
+   docker-compose down
    ```
 
-2. **Open with Live Server**
-   - Use a local development server (e.g., VS Code Live Server extension)
-   - Or simply open `home.html` in your browser
+## 🐳 Docker Architecture
+
+The application runs as three Docker containers orchestrated by Docker Compose:
+
+| Service | Description | Port |
+|---------|-------------|------|
+| **db** | MongoDB database with automatic data seeding | 27017 (internal) |
+| **back-end** | Node.js/Express API server | 3000 (internal) |
+| **front-end** | Nginx serving static files + reverse proxy | 8000 (host) |
+
+### Data Persistence
+
+Two named bind volumes ensure your data survives container restarts and rebuilds:
+
+| Volume | Container Path | Host Path | Purpose |
+|--------|----------------|-----------|----------|
+| `db_data` | `/data/db` | `./data/database-data/` | MongoDB data files |
+| `product_images` | `/app/src/modules/products/productsImages` | `./data/uploaded-images/` | Uploaded product images |
+
+All persistent data is stored in the `data/` directory at the project root, making backups straightforward:
+```bash
+# Backup everything
+tar czvf backup.tar.gz data/
+```
+
+### Network
+
+All services communicate over an internal Docker bridge network (`app`). The frontend Nginx container is the only service exposed to the host, acting as a reverse proxy that forwards `/api/*` and `/images/*` requests to the backend.
 
 ## 📡 API Endpoints
 
@@ -181,9 +227,9 @@ Configure your email service in the `.env` file using SMTP credentials.
 ## 🖼️ Image Upload
 
 Product images are uploaded using Multer:
-- Images are stored in `back-end/src/modules/products/productsImages/`
+- Images are persisted in the `data/uploaded-images/` directory on the host via a Docker bind volume
 - Multiple images per product supported (up to 5)
-- Accessible via `http://localhost:3000/images/filename`
+- Accessible via `http://localhost:8000/images/filename` (proxied through Nginx)
 
 ## 🎨 Features in Detail
 
@@ -207,9 +253,10 @@ Product images are uploaded using Multer:
 
 ## 🐛 Known Issues & Solutions
 
-- **Image uploads**: Ensure the `productsImages` directory exists and has write permissions
+- **Image uploads**: Ensure the `data/uploaded-images/` directory exists on the host before starting containers
 - **Email sending**: Configure valid SMTP credentials in `.env`
-- **CORS issues**: Update CORS settings in `app.js` if frontend is on different domain
+- **Database seeding**: The database is only seeded on the first run (when `data/database-data/` is empty). To re-seed, stop containers and delete `data/database-data/`
+- **Volume permissions**: The `data/database-data/` directory is owned by the MongoDB container user (UID 999). Avoid manually modifying files inside it
 
 ## 🤝 Contributing
 
