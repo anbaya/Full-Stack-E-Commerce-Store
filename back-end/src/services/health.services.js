@@ -3,50 +3,46 @@ const transporter = require('../utils/mailer.js').transporter;
 const fs = require('fs/promises');
 const path = require('path');
 
-
 const DBhealthCheck = async () => {
-    try {
-        const dbState = mongoose.connection.readyState;
-        if (dbState !== 1)
-        {
-            return {
-                status: 'disconnected',
-                readyState: dbState,
-                message: 'Database is not connected',
-                timestamp: new Date().toISOString(),
-            };
-        }
-
-        const admin = mongoose.connection.getClient().db('admin');
-        const pingResult = await admin.command({ ping: 1 });
-
-        if (pingResult.ok !== 1)
-        {
-            return {
-                status: 'error',
-                message: 'Database ping failed',
-                timestamp: new Date().toISOString(),
-            };
-        }
-
-        return {
-            status: 'healthy',
-            readyState: dbState,
-            database: mongoose.connection.name,
-            host: mongoose.connection.host,
-            port: mongoose.connection.port,
-            message: 'Database is healthy',
-            timestamp: new Date().toISOString(),
-        };
-
-    } catch (error) {
-        return {
-            status: 'error',
-            message: 'Error checking database connection',
-            error: error.message,
-            timestamp: new Date().toISOString(),
-        };
+  try {
+    const dbState = mongoose.connection.readyState;
+    if (dbState !== 1) {
+      return {
+        status: 'disconnected',
+        readyState: dbState,
+        message: 'Database is not connected',
+        timestamp: new Date().toISOString(),
+      };
     }
+
+    const admin = mongoose.connection.getClient().db('admin');
+    const pingResult = await admin.command({ ping: 1 });
+
+    if (pingResult.ok !== 1) {
+      return {
+        status: 'error',
+        message: 'Database ping failed',
+        timestamp: new Date().toISOString(),
+      };
+    }
+
+    return {
+      status: 'healthy',
+      readyState: dbState,
+      database: mongoose.connection.name,
+      host: mongoose.connection.host,
+      port: mongoose.connection.port,
+      message: 'Database is healthy',
+      timestamp: new Date().toISOString(),
+    };
+  } catch (error) {
+    return {
+      status: 'error',
+      message: 'Error checking database connection',
+      error: error.message,
+      timestamp: new Date().toISOString(),
+    };
+  }
 };
 
 // Check if transporter is configured + test SMTP connection
@@ -63,14 +59,14 @@ const mailerHealthCheck = async () => {
     return {
       status: 'healthy',
       message: 'Mailer is configured and SMTP connection verified',
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
   } catch (error) {
     return {
       status: 'error',
       message: 'Mailer verification failed',
       error: error.message,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
   }
 };
@@ -96,15 +92,15 @@ const fileSystemHealth = async () => {
       status: 'healthy',
       message: 'Uploads directory is readable and writable',
       path: uploadsDir,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
-    } catch (error) {
+  } catch (error) {
     return {
       status: 'error',
       message: 'Uploads directory health check failed',
       path: uploadsDir,
       error: error.message,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
   }
 };
@@ -120,12 +116,13 @@ const secretsValidation = () => {
     status: missing.length === 0 && !weakSecret ? 'healthy' : 'warning',
     missing,
     weakSecret,
-    message: missing.length > 0
-      ? 'Some required environment variables are missing'
-      : weakSecret
-        ? 'JWT_SECRET is too short'
-        : 'All required environment variables are set',
-    timestamp: new Date().toISOString()
+    message:
+      missing.length > 0
+        ? 'Some required environment variables are missing'
+        : weakSecret
+          ? 'JWT_SECRET is too short'
+          : 'All required environment variables are set',
+    timestamp: new Date().toISOString(),
   };
 };
 
@@ -133,7 +130,10 @@ const secretsValidation = () => {
 const nodeHealthCheck = () => {
   try {
     const raw = process.version || '';
-    const version = (process.versions && process.versions.node) ? process.versions.node : raw.replace(/^v/, '');
+    const version =
+      process.versions && process.versions.node
+        ? process.versions.node
+        : raw.replace(/^v/, '');
     const execPath = process.execPath || null;
     const arch = process.arch || null;
     const platform = process.platform || null;
@@ -161,23 +161,25 @@ const nodeHealthCheck = () => {
       execPath,
       arch,
       platform,
-      message: meetsMinimum ? 'Node.js runtime meets minimum version' : 'Node.js version is below recommended minimum',
-      timestamp: new Date().toISOString()
+      message: meetsMinimum
+        ? 'Node.js runtime meets minimum version'
+        : 'Node.js version is below recommended minimum',
+      timestamp: new Date().toISOString(),
     };
   } catch (error) {
     return {
       status: 'error',
       message: 'Error checking Node.js runtime',
       error: error.message,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
   }
 };
 
 module.exports = {
-    DBhealthCheck,
-    mailerHealthCheck,
-    fileSystemHealth,
-    secretsValidation,
-    nodeHealthCheck
+  DBhealthCheck,
+  mailerHealthCheck,
+  fileSystemHealth,
+  secretsValidation,
+  nodeHealthCheck,
 };

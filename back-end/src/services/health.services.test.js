@@ -1,8 +1,11 @@
 const { describe } = require('node:test');
-const { secretsValidation, nodeHealthCheck, DBhealthCheck } = require('./health.services');
+const {
+  secretsValidation,
+  nodeHealthCheck,
+  DBhealthCheck,
+} = require('./health.services');
 
 describe('Health Services', () => {
-
   describe('secretsValidation', () => {
     // Save original env vars to restore them after tests
     const originalEnv = process.env;
@@ -54,7 +57,7 @@ describe('Health Services', () => {
   describe('nodeHealthCheck', () => {
     it('should return healthy if Node version meets minimum requirements', () => {
       const result = nodeHealthCheck();
-      
+
       // We assume the system running the test has at least Node v16
       expect(result.status).toBe('healthy');
       expect(result.message).toBe('Node.js runtime meets minimum version');
