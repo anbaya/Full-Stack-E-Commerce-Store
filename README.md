@@ -1,5 +1,7 @@
 # Full-Stack E-Commerce Store
 
+[![CI](https://github.com/anbaya/Full-Stack-E-Commerce-Store/actions/workflows/ci.yml/badge.svg)](https://github.com/anbaya/Full-Stack-E-Commerce-Store/actions/workflows/ci.yml)
+
 A full-stack e-commerce application built with Node.js, Express, MongoDB, and vanilla JavaScript. This project features a complete online shopping experience with user authentication, product management, shopping cart functionality, order processing, and an admin dashboard.
 take a look at the live demo: 👉 https://www.deseller.run.place
 
@@ -30,6 +32,8 @@ take a look at the live demo: 👉 https://www.deseller.run.place
 - **Nodemailer**: Email notifications
 - **Axios**: HTTP client
 - **Jest**: Unit testing framework
+- **ESLint**: Code linting (flat config format)
+- **Prettier**: Code formatting
 
 ### Frontend
 - **HTML5**: Structure
@@ -41,6 +45,7 @@ take a look at the live demo: 👉 https://www.deseller.run.place
 - **Docker** & **Docker Compose**: Containerization and orchestration
 - **Nginx**: Reverse proxy and static file serving
 - **Named Bind Volumes**: Persistent data storage for database and uploaded images
+- **GitHub Actions**: CI pipeline for automated builds, linting, and testing
 
 ## 📁 Project Structure
 
@@ -154,16 +159,34 @@ Full-Stack-E-Commerce-Store/
    ```
 
 ### Running Tests
-The project uses Jest for unit testing.
-1. Ensure dependencies are installed in the backend folder:
-   ```bash
-   cd back-end
-   npm install
-   ```
-2. Run the tests:
-   ```bash
-   npm test
-   ```
+The project uses Jest for unit testing. Tests run inside Docker for full environment parity:
+```bash
+docker compose run --rm back-end npm test
+```
+
+### Running Lint
+The project uses ESLint with Prettier for code quality:
+```bash
+docker compose run --rm back-end npm run lint
+```
+To auto-fix formatting issues:
+```bash
+docker compose run --rm back-end npm run lint:fix
+```
+
+## 🔄 CI Pipeline
+
+This project uses **GitHub Actions** to automatically validate every push and pull request to `main`. The pipeline runs entirely inside Docker for consistency with the production environment.
+
+| Step | Command | Purpose |
+|------|---------|----------|
+| **Checkout** | `actions/checkout@v4` | Clone the repository |
+| **Build Docker Images** | `docker compose build` | Validate all Dockerfiles |
+| **Create Volumes** | `mkdir -p ./data/...` | Ensure bind-mount directories exist |
+| **Lint** | `docker compose run --rm back-end npm run lint` | Enforce code style (ESLint + Prettier) |
+| **Test** | `docker compose run --rm back-end npm test` | Run Jest unit tests |
+
+The CI status badge at the top of this README reflects the current build status.
 
 ## 🐳 Docker Architecture
 
