@@ -15,6 +15,9 @@ jobs:
       - name: "Build Docker images"
         run: docker compose build
         
+      - name: "Create missing volume directories"
+        run: mkdir -p ./data/database-data ./data/uploaded-images
+        
       - name: "Run Lint (Back-end)"
         run: docker compose run --rm back-end npm run lint
         
